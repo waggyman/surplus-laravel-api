@@ -11,7 +11,10 @@ class Image extends Model
 {
     use HasFactory;
     public $timestamps = false;
-
+    public $fillable = ['name', 'file', 'enable'];
+    protected $casts = [
+        'enable' => 'boolean'
+    ];
 
     public function products (): BelongsToMany
     {
