@@ -1,66 +1,85 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+### Simple Product CRUD API
+In this repo, we provide a REST API made with **LARAVEL**. At the moment what you can do while using this application are:
+- CRUD PRODUCT
+- CRUD CATEGORY
+- CRUD IMAGE
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+To run this repository you need to make sure:
+- Have git
+- Have PHP 8+ in your local machine
+- Have composer 2 in your local machine
+- Have MySQL Server (Make sure you create a db named 'surplus')
+- Have Postman application
 
-## About Laravel
+After you make sure everything, now you can run the application with:
+1. Clone the repository with `git clone`
+```shell
+git clone git@github.com:waggyman/surplus-laravel-api.git
+```
+2. cd to the cloned project
+```shell
+cd surplus-laravel-api
+```
+3. copy the `.env.example` to `.env`
+```shell
+cp .env.example .env
+```
+4. Modify the `.env` file with your code editor. Change the corresponding variable
+```shell
+# .env file
+DB_CONNECTION=mysql
+DB_HOST={YOUR HOST | If local usually it's 127.0.0.1}
+DB_PORT={DB PORT | Usually 3306}
+DB_DATABASE=surplus
+DB_USERNAME={your db username | root}
+DB_PASSWORD={your db password}
+```
+5. After change and save the `.env` file. You need to run `composer install`
+```shell
+composer install -v
+```
+6. Once the composer installation is done. You can validate if the application can be ran or not with testing the artisan
+```shell
+php artisan
+```
+If it's success, you should be able to see this:
+```shell
+Laravel Framework 10.4.1
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Usage:
+  command [options] [arguments]
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Options:
+  -h, --help            Display help for the given command. When no command is given display help for the list command
+  -q, --quiet           Do not output any message
+  -V, --version         Display this application version
+      --ansi|--no-ansi  Force (or disable --no-ansi) ANSI output
+  -n, --no-interaction  Do not ask any interactive question
+      --env[=ENV]       The environment the command should run under
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+7. After you verify. You need to generate key with:
+```shell
+php artisan key:generate
+```
 
-## Learning Laravel
+8. Then you need to run the migration. It's used to populate the table for this application
+```shell
+php artisan migrate
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+9. Once the migration success, you need to run the seeder. It's used to generate some data inside those table
+```shell
+php artisan db:seed
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+10. After everything is success. You need to use the `serve` command to make the application run.
+```shell
+php artisan serve
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+11. Then to verify. You can just open a browser and in the url box just type `localhost:8000/api/products`. If the previous step is success. You should be able to see a JSON Response filled with product data.
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+(optional)
+12. You can import the file named `SURPLUS_API.postman_collection.json` from this repository to your Postman. Once you imported it, you should be able to see new **collection** in your postman. From that collection you can see there are 3 folder `PRODUCT`, `IMAGE` and `CATEGORY`. Those folder contained some HTTP Request that you can use directly.
