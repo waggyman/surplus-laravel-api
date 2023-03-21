@@ -10,6 +10,7 @@ class Product extends Model
 {
     use HasFactory;
 
+    public $fillable = ['name', 'description', 'enable'];
     public $timestamps = false;
 
 
