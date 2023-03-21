@@ -81,7 +81,49 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, string $id)
     {
         $product = Product::findOrFail($id);
-        Product::where('id', $id)->update($request->all());
+        $productData = [
+            'name' => $request->get('name', $product->name),
+            'description' => $request->get('description', $product->description),
+            'enable' => $request->get('enable', $product->enable)
+        ];
+        Product::where('id', $id)->update($productData);
+
+        $file = $request->file('image');
+        if ($file) {
+            $fileName = time() . '-' . $file->getClientOriginalName();
+            $upload = Storage::disk('my_files')->put('images', $file);
+            Storage::disk('my_files')->move($upload, 'images/'. $fileName);
+            
+            $imageDate = [
+                'name' => $fileName,
+                'file' => '/images/'.$fileName,
+                'enable' => true
+            ];
+
+            $image = Image::create($imageDate);
+            $product->images()->sync([$image->id]);
+        }
+
+        $categories = $request->get('category', []);
+        $existingCategory = [];
+
+        foreach ($categories as $cat) {
+            $find = Category::where('name', $cat)->first();
+            if ($find) {
+                array_push($existingCategory, $find->id);
+            } else {
+                $newCategory = Category::create([
+                    'name' => $cat,
+                    'enable' => true
+                ]);
+                array_push($existingCategory, $newCategory->id);
+            }
+        }
+        if (count($categories) > 0) {
+            $product->categories()->sync($existingCategory);
+        }
+        
+
         return Product::findOrFail($id);
     }
 

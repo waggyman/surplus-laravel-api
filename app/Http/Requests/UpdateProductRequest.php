@@ -24,7 +24,10 @@ class UpdateProductRequest extends FormRequest
         return [
             'name' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'enable' => 'nullable|boolean'
+            'enable' => 'nullable|boolean',
+            'category' => 'nullable|array',
+            'category.*' => 'nullable|string',
+            'image' => 'nullable|file'
         ];
     }
 }

@@ -16,7 +16,7 @@ use App\Http\Controllers\ImageController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
+Route::post('/products/{id}', [ProductController::class, 'update']);
 Route::resources([
     '/products' => ProductController::class,
     '/categories' => CategoryController::class,
