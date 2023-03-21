@@ -81,5 +81,6 @@ php artisan serve
 
 11. Then to verify. You can just open a browser and in the url box just type `localhost:8000/api/products`. If the previous step is success. You should be able to see a JSON Response filled with product data.
 
-(optional)
+**(optional step)**
+
 12. You can import the file named `SURPLUS_API.postman_collection.json` from this repository to your Postman. Once you imported it, you should be able to see new **collection** in your postman. From that collection you can see there are 3 folder `PRODUCT`, `IMAGE` and `CATEGORY`. Those folder contained some HTTP Request that you can use directly.
