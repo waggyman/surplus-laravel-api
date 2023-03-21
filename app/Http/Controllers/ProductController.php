@@ -50,12 +50,12 @@ class ProductController extends Controller
         $existingCategory = [];
 
         foreach ($request->get('category') as $cat) {
-            $find = Category::where('name', strtolower($cat))->first();
+            $find = Category::where('name', $cat)->first();
             if ($find) {
                 array_push($existingCategory, $find->id);
             } else {
                 $newCategory = Category::create([
-                    'name' => strtolower($cat),
+                    'name' => $cat,
                     'enable' => true
                 ]);
                 array_push($existingCategory, $newCategory->id);

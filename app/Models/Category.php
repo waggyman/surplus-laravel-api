@@ -9,8 +9,11 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
-    
+    public $fillable = ['name', 'enable'];
     public $timestamps = false;
+    protected $casts = [
+        'enable' => 'boolean'
+    ];
 
     public function products (): BelongsToMany
     {
